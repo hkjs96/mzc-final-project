@@ -175,7 +175,7 @@ resource "aws_lambda_function" "orderConsumer" {
 
   environment {
     variables = {
-      OWNER = "756852414300"
+      OWNER = "116643118394"
       QUEUE_NAME = "order_queue"
       TABLE_NAME = "OrderHistory"
     }
@@ -215,7 +215,7 @@ resource "aws_lambda_function" "order" {
 
   environment {
     variables = {
-      OWNER = "756852414300"
+      OWNER = "116643118394"
       QUEUE_NAME = "order_queue"
       TABLE_NAME = "OrderHistory"
     }

@@ -3,7 +3,7 @@
 resource "aws_eks_cluster" "eks-cluster" {
   name     = "eks-cluster"
   role_arn = aws_iam_role.eks-cluster-role.arn
-  version  = "1.25"
+  version  = "1.27"
 
   vpc_config {
     subnet_ids = [
@@ -24,7 +24,8 @@ resource "aws_eks_cluster" "eks-cluster" {
   ]
 
   tags = {
-    "alpha.eksctl.io/cluster-oidc-enabled" = true
+    "alpha.eksctl.io/cluster-oidc-enabled" = true,
+    "Name" = "EKS-NODE"
   }
 }
 
