@@ -5,6 +5,8 @@ resource "aws_eks_node_group" "eks-node-group" {
   subnet_ids = [
     data.aws_subnet.eks-pvt_2a.id,
     data.aws_subnet.eks-pvt_2c.id,
+    data.aws_subnet.eks-pvt_2b.id,
+    data.aws_subnet.eks-pvt_2d.id,
   ] 
 
   # Optional Property

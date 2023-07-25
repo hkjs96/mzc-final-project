@@ -30,8 +30,8 @@ resource "aws_subnet" "ap-northeast-2-pub_2" {
     ]), count.index)    
 
     # AWS Load Balancer Controller 이용시 사용
-    "kubernetes.io/role/internal-elb"	         = 1  # 1 or ""
-    "kubernetes.io/cluster/eks-cluster"   = "owned" # "shared" or "owned"
+    "kubernetes.io/role/elb"	            = 1  # 1 or ""
+    "kubernetes.io/cluster/eks-cluster"   = "shared" # "shared" or "owned"
   }
 }
 

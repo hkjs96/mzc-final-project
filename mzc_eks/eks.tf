@@ -9,6 +9,8 @@ resource "aws_eks_cluster" "eks-cluster" {
     subnet_ids = [
       data.aws_subnet.eks-pvt_2a.id,
       data.aws_subnet.eks-pvt_2c.id,
+      data.aws_subnet.eks-pvt_2b.id,
+      data.aws_subnet.eks-pvt_2d.id,
     ]  # Replace with your desired subnet IDs
 
   }
