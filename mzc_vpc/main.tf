@@ -19,7 +19,7 @@ resource "aws_subnet" "ap-northeast-2-pub_2" {
   count             = 4
   vpc_id            = aws_vpc.ap-northeast-2_vpc.id
   map_public_ip_on_launch = true
-  cidr_block        = "172.100.${count.index * 16}.0/24"
+  cidr_block        = "172.100.${count.index * 16}.0/20"
   availability_zone = data.aws_availability_zones.available.names[count.index]
   tags = {
     Name = element(sort([
@@ -31,7 +31,7 @@ resource "aws_subnet" "ap-northeast-2-pub_2" {
 
     # AWS Load Balancer Controller 이용시 사용
     "kubernetes.io/role/elb"	            = 1  # 1 or ""
-    "kubernetes.io/cluster/eks-cluster"   = "shared" # "shared" or "owned"
+    "kubernetes.io/cluster/eks-cluster"   = "owned" # "shared" or "owned"
   }
 }
 
@@ -39,7 +39,7 @@ resource "aws_subnet" "ap-northeast-2-pvt_2" {
   count             = 4
   vpc_id            = aws_vpc.ap-northeast-2_vpc.id
   map_public_ip_on_launch = false
-  cidr_block        = "172.100.${(4 + count.index) * 16}.0/24"
+  cidr_block        = "172.100.${(4 + count.index) * 16}.0/20"
   availability_zone = data.aws_availability_zones.available.names[count.index]
   tags = {
     Name = element(sort([
@@ -50,7 +50,7 @@ resource "aws_subnet" "ap-northeast-2-pvt_2" {
     ]), count.index)
     
     # AWS Load Balancer Controller 이용시 사용
-    "kubernetes.io/role/elb"                   = 1  # 1 or ""
+    "kubernetes.io/role/internal-elb"                   = 1  # 1 or ""
     "kubernetes.io/cluster/eks-cluster"   = "owned" # "shared" or "owned"
   }
 }

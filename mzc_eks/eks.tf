@@ -7,10 +7,10 @@ resource "aws_eks_cluster" "eks-cluster" {
 
   vpc_config {
     subnet_ids = [
-      data.aws_subnet.eks-pvt_2a.id,
-      data.aws_subnet.eks-pvt_2c.id,
-      data.aws_subnet.eks-pvt_2b.id,
-      data.aws_subnet.eks-pvt_2d.id,
+      data.aws_subnet.eks-pub_2a.id,
+      data.aws_subnet.eks-pub_2c.id,
+      data.aws_subnet.eks-pub_2b.id,
+      data.aws_subnet.eks-pub_2d.id,
     ]  # Replace with your desired subnet IDs
 
   }
@@ -19,8 +19,8 @@ resource "aws_eks_cluster" "eks-cluster" {
   enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
   depends_on = [
-    data.aws_subnet.eks-pvt_2a,
-    data.aws_subnet.eks-pvt_2c,
+    data.aws_subnet.eks-pub_2a,
+    data.aws_subnet.eks-pub_2c,
     aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy,
     aws_iam_role_policy_attachment.eks-AmazonEKSVPCResourceController,
   ]

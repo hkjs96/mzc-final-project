@@ -3,19 +3,19 @@ resource "aws_eks_node_group" "eks-node-group" {
   node_group_name = "eks-node-group"
   node_role_arn   = aws_iam_role.eks-node-group-role.arn
   subnet_ids = [
-    data.aws_subnet.eks-pvt_2a.id,
-    data.aws_subnet.eks-pvt_2c.id,
-    data.aws_subnet.eks-pvt_2b.id,
-    data.aws_subnet.eks-pvt_2d.id,
+    data.aws_subnet.eks-pub_2a.id,
+    data.aws_subnet.eks-pub_2c.id,
+    data.aws_subnet.eks-pub_2b.id,
+    data.aws_subnet.eks-pub_2d.id,
   ] 
 
   # Optional Property
-  instance_types = [ "t3.large" ]
+  instance_types = [ "t2.small" ]
 
   scaling_config {
-    desired_size = 4
-    max_size     = 6
-    min_size     = 2
+    desired_size = 30
+    max_size     = 60
+    min_size     = 30
   }
 
   update_config {
