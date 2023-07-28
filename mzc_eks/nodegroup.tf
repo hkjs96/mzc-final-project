@@ -5,17 +5,17 @@ resource "aws_eks_node_group" "eks-node-group" {
   subnet_ids = [
     data.aws_subnet.eks-pub_2a.id,
     data.aws_subnet.eks-pub_2c.id,
-    data.aws_subnet.eks-pub_2b.id,
-    data.aws_subnet.eks-pub_2d.id,
+    # data.aws_subnet.eks-pub_2b.id,
+    # data.aws_subnet.eks-pub_2d.id,
   ] 
 
   # Optional Property
   instance_types = [ "t2.small" ]
 
   scaling_config {
-    desired_size = 30
-    max_size     = 60
-    min_size     = 30
+    desired_size = 25
+    max_size     = 30
+    min_size     = 25
   }
 
   update_config {
@@ -30,6 +30,7 @@ resource "aws_eks_node_group" "eks-node-group" {
     aws_iam_role_policy_attachment.eks-AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.eks-AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.eks-AmazonEC2ContainerRegistryReadOnly,
+    aws_iam_role_policy_attachment.eks-AWSXRayDaemonWriteAccess,
   ]
 }
 
@@ -67,5 +68,9 @@ resource "aws_iam_role_policy_attachment" "eks-AmazonEC2ContainerRegistryReadOnl
 }
 
 
-
+# X-Ray 사용을 위한 정책 추가
+resource "aws_iam_role_policy_attachment" "eks-AWSXRayDaemonWriteAccess" {
+  policy_arn = "arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess"
+  role       = aws_iam_role.eks-node-group-role.name
+}
 
