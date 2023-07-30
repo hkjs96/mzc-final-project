@@ -1,4 +1,4 @@
-resource "aws_acm_certificate" "api" {
+resource "aws_acm_certificate" "mzc-api" {
   # cloudfront 같은 것을 이용하려면 버지니아 북부에 인증서를 발급받아야한다.
   provider = aws.virginia
 
@@ -11,7 +11,7 @@ resource "aws_acm_certificate" "api" {
   }
 
   # lifecycle {
-  #   create_before_destroy = true
+  #   prevent_destroy = true
   # }
 }
 
@@ -22,7 +22,7 @@ data "aws_route53_zone" "public" {
 
 resource "aws_route53_record" "api_validation" {
   for_each = {
-    for dvo in aws_acm_certificate.api.domain_validation_options : dvo.domain_name => {
+    for dvo in aws_acm_certificate.mzc-api.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -39,7 +39,7 @@ resource "aws_route53_record" "api_validation" {
 
 resource "aws_acm_certificate_validation" "api" {
   provider = aws.virginia
-  certificate_arn         = aws_acm_certificate.api.arn
+  certificate_arn         = aws_acm_certificate.mzc-api.arn
   validation_record_fqdns = [for record in aws_route53_record.api_validation : record.fqdn]
 
   timeouts {

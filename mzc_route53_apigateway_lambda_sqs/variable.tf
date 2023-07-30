@@ -15,7 +15,7 @@ variable "order_dead_letter_queue_name" {
 }
 
 variable "domain_name" {
-  default = "mega-mall.site"
+  default = "xn--1-3x5ew15b.shop"
 }
 
 variable "table_name" {
