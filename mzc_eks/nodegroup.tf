@@ -9,13 +9,13 @@ resource "aws_eks_node_group" "eks-node-group" {
     # data.aws_subnet.eks-pub_2d.id,
   ] 
 
-  # Optional Property
-  instance_types = [ "t2.small" ]
+  # Optional Property, t3.small - 11 pod 
+  instance_types = [ "t3.small" ]
 
   scaling_config {
-    desired_size = 25
-    max_size     = 30
-    min_size     = 25
+    desired_size = 10 
+    max_size     = 15
+    min_size     = 10
   }
 
   update_config {
