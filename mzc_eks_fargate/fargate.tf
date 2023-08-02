@@ -1,4 +1,3 @@
-/*
 resource "aws_eks_fargate_profile" "cert-manager" {
   cluster_name           = aws_eks_cluster.eks-cluster.name
   fargate_profile_name   = "cert-manager"
@@ -33,7 +32,6 @@ resource "aws_eks_fargate_profile" "kube-system" {
     Name = "kube-system"
   }
 }
-*/
 
 resource "aws_eks_fargate_profile" "default" {
   cluster_name           = aws_eks_cluster.eks-cluster.name
@@ -53,7 +51,7 @@ resource "aws_eks_fargate_profile" "default" {
 }
 
 resource "aws_iam_role" "eks-fargate-profile" {
-  name = "eks-fargate-profile"
+  name = "mzc-eks-fargate-profile"
 
   assume_role_policy = jsonencode({
     Statement = [{
